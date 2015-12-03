@@ -79,14 +79,29 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //loop through each row
+        //if item in row is 1, increment counter
+      //if counter bigger than 1, return true
+      var count = 0;
+      var context = this;
+       for (var i = 0; i < context.get(rowIndex).length; i++){
+         if(context.get(rowIndex)[i] === 1) {
+          count++;
+         }
+         if (count > 1) {
+          return true;
+         }
+       }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var context = this;
+      return _.some(context.rows(), function(row, i) {
+        return(context.hasRowConflictAt(i));
+      });
     },
-
 
 
     // COLUMNS - run from top to bottom
