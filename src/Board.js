@@ -112,7 +112,7 @@
     hasColConflictAt: function(colIndex) {
       var count = 0;
       var context = this;
-      for (var i = 0; i < context.rows().length; i++){
+      for (var i = 0; i < context.get('n'); i++){
         if (context.rows()[i][colIndex] === 1) {
           count++;
         }
@@ -125,9 +125,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      var result = false;
       for (var i = 0; i < this.rows().length; i++){
-        return (this.hasColConflictAt(i));
+        if (this.hasColConflictAt(i)) {
+          result = true;
+        }
       }
+      return result;
     },
 
 
