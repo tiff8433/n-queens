@@ -145,7 +145,7 @@
       var count = 0;
       var size = this.get('n');
 
-      for ( ; rowIdx < size && colIdx >= 0; rowIdx++, colIdx++){
+      for ( ; rowIdx < size && colIdx < size; rowIdx++, colIdx++){
         if (colIdx >= 0) {
           if(this.get(rowIdx)[colIdx] === 1) {
             count++;
@@ -161,7 +161,7 @@
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var size = this.get('n');
-      for (var colIdx = 3; colIdx > 1 - size; colIdx--){
+      for (var colIdx = size - 1; colIdx > 1 - size; colIdx--){
         if (this.hasMajorDiagonalConflictAt(colIdx)){
           return true;
         }

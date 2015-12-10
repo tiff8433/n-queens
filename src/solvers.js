@@ -74,30 +74,30 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var solution; //fixme
   //create a new board to hold solution
   var board = new Board({n:n});
+  var solution =board.rows(); //fixme
   //recursive function: look at each row
   var placePieces = function(row) {
     //if row is equal to n
     if (row === n) {
       //set solution to the matrix within board
-      solution = board.rows();
-      //return solution
+      solution = _.map(board.rows(), function(row){
+        return row.slice();
+      });
+      // return solution
       return;
     }
     //iterate through columns
     for (var col = 0; col < n; col++) {
       //place a piece
       board.togglePiece(row, col);
-      //if no conflicts
       if (!board.hasAnyQueensConflicts()) {
         //call recursive function on next row (row+1)
+      //if no conflicts
         placePieces(row + 1);
-      } else {
-        //else remove piece
-        board.togglePiece(row, col);
       }
+      board.togglePiece(row, col);
     }
   };
   placePieces(0);
